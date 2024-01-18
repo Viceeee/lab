@@ -78,7 +78,7 @@ getint(va_list *ap, int lflag)
 static long long 
 getbinary(va_list *ap, int lflag)
 {
-
+	return 0;
 }
 
 // Main function to format and print a string.

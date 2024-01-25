@@ -15,7 +15,7 @@
 
 #define CRT_ROWS	25
 #define CRT_COLS	80
-#define CRT_SIZE	(CRT_ROWS * CRT_COLS)
+#define CRT_SIZE	(CRT_ROWS * CRT_COLS) //25*80=2000
 
 void cons_init(void);
 int cons_getc(void);

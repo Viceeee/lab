@@ -163,7 +163,7 @@ static void
 cga_putc(int c)
 {
 	// if no attribute given, then use black on white
-	if (!(c & ~0xFF))
+	if (!(c & ~0xFF))//0xFF是serial port不存在的时候返回的？那么这里就是0x00000000？那么这里就是（c&~0xFF)取决于c是否有，假如有的话则进入下面的if语句，没有的话则进入Switch?
 		c |= 0x0700;
 
 	switch (c & 0xff) {
@@ -189,9 +189,11 @@ cga_putc(int c)
 	default:
 		crt_buf[crt_pos++] = c;		/* write the character */
 		break;
-	}
+	}//这里就是检测是否是字符串尾，假如是\t \b \n \r(?)的话就进行处理
 
 	// What is the purpose of this?
+	// CRT_SIZE是CRT_COL*CRT_ROW 所得到的
+	// 检测这个crt_pos是否大于屏幕？换行？
 	if (crt_pos >= CRT_SIZE) {
 		int i;
 

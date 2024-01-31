@@ -193,14 +193,14 @@ cga_putc(int c)
 
 	// What is the purpose of this?
 	// CRT_SIZE是CRT_COL*CRT_ROW 所得到的
-	// 检测这个crt_pos是否大于屏幕？换行？
+	// 检测这个crt_pos是否大于屏幕？换行？所以这个crt_pos是啥？应该是这个指示针的位置?假如超过这整个屏幕的size就直接换？
 	if (crt_pos >= CRT_SIZE) {
 		int i;
 
-		memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * sizeof(uint16_t));
-		for (i = CRT_SIZE - CRT_COLS; i < CRT_SIZE; i++)
+		memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * sizeof(uint16_t));//直接将buf移动到新的地方
+		for (i = CRT_SIZE - CRT_COLS; i < CRT_SIZE; i++)//超过buf的部分把crt_buf置为0x700或者是' '?
 			crt_buf[i] = 0x0700 | ' ';
-		crt_pos -= CRT_COLS;
+		crt_pos -= CRT_COLS;//重置crt_pos
 	}
 
 	/* move that little blinky thing */
